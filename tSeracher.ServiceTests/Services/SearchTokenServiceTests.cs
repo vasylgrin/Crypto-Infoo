@@ -45,6 +45,36 @@ namespace tSeracher.Service.Services.Tests
         }
 
         [TestMethod()]
+        public async Task SerachTokenAsync_UnknownTokenName_null()
+        {
+            // arrange
+
+            string name = "sdgsdfgdsfg";
+
+            // act
+
+            var token = await SearchTokenService.SearchTokenAsync(name);
+
+            // assert
+
+            Assert.IsNull(token);
+        }
+
+        public async Task SerachTokenAsync_EmptyInputString_ArgumentNullException()
+        {
+            // arrange
+
+            string name = "";
+
+            // act
+            // assert
+
+            await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => await SearchTokenService.SearchTokenAsync(name));
+        }
+
+
+
+        [TestMethod()]
         public async Task GetAllTokensAsyncTest()
         {
             // arrange

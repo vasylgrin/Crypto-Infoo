@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using tSeracherr.Entity.Models;
 
 namespace tSeracher.Service.Services.Tests
 {
@@ -19,6 +20,20 @@ namespace tSeracher.Service.Services.Tests
             // assert
 
             Assert.AreNotEqual(0, markets.Count);
+        }
+
+        [TestMethod()]
+        public async Task GetMarketsByTokenAsync_EmptyToken_ArgumentNullException()
+        {
+            // arrange
+
+            Token token = null;
+
+            // act
+            // assert
+
+            await Assert.ThrowsExceptionAsync<ArgumentNullException>(
+                async () => await SearchMarketsService.GetMarketsByTokenAsync(token));
         }
     }
 }

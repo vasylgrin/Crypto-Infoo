@@ -1,6 +1,5 @@
 ﻿using LiveCharts.Defaults;
 using Newtonsoft.Json.Linq;
-using tSeracher.Domain.ModelDomain;
 using tSeracher.Service.Helpers;
 using tSeracherr.Entity.Models;
 
@@ -11,19 +10,18 @@ namespace tSeracher.Service.Services
         public static async Task<List<OhlcPoint>> GetCandlesByTokenAsync(Token token)
         {
             if (token == null)
-            {
-                throw new ArgumentNullException(nameof(token)); //TODO: EVENT.
-            }
+                throw new ArgumentNullException(nameof(token), "Input data is null.");
+
             string link = $"https://api.coingecko.com/api/v3/coins/{token.FullName}/ohlc?vs_currency=usd&days=30";
-
-
             string allCandlesString = await ReciveRequestHelper.ReciveToRequest(link);
-            var candlesJArray = JArray.Parse(allCandlesString);
 
-            return await Task.FromResult(CreateCandle(candlesJArray));
+            var candlesJArray = JArray.Parse(allCandlesString);
+            var candles = await CreateCandleAsync(candlesJArray);
+
+            return await Task.FromResult(candles);
         }
 
-        private static List<OhlcPoint> CreateCandle(JArray candlesArray)
+        private static async Task<List<OhlcPoint>> CreateCandleAsync(JArray candlesArray)
         {
             var candlesCollection = new List<OhlcPoint>();
 
@@ -33,7 +31,7 @@ namespace tSeracher.Service.Services
                 candlesCollection.Add(candle);
             }
 
-            return candlesCollection;
+            return await Task.FromResult(candlesCollection);
         }
     }
 }

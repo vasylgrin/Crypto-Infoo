@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using tSeracher.Service.Services;
+using tSeracherr.Entity.Excpetions;
 using tSeracherr.Entity.Models;
 using tSeracherr.WPF.Delegate;
 
@@ -25,20 +27,29 @@ namespace tSeracherr.WPF.ViewModel
             {
                 return new DelegateCommand(async obj =>
                 {
-                    //TokenForSearch.CheckForNull(); // TODO: CheckForNull
+                    Token token;
+                    List<Market> markets;
 
-                    var token = await SearchTokenService.SearchTokenAsync(TokenForSearch);
-                    List<Market> markets = await SearchMarketsService.GetMarketsByTokenAsync(token);
-
-                    //token.CheckForNull();
-                    //markets.CheckForNull();
-                    //markets.CheckForAnyValue();  TODO: CheckForNull
-
-                    PrintSearchToken = token.ToString();
 
                     PrintMarkets.Clear();
-                    PrintMarkets = new ObservableCollection<Market>(markets);
+                    if (string.IsNullOrWhiteSpace(TokenForSearch))
+                    {
+                        PrintSearchToken = "Enter token name pls.";
+                        return;
+                    }
+                    token = await SearchTokenService.SearchTokenAsync(TokenForSearch);
 
+
+                    if(token is null)
+                    {
+                        PrintSearchToken = $"{TokenForSearch} is not found";
+                        return;
+                    }
+                    PrintSearchToken = token.ToString();
+                    
+                    
+                    markets = await SearchMarketsService.GetMarketsByTokenAsync(token);
+                    PrintMarkets = new ObservableCollection<Market>(markets);
                 });
             }
         }

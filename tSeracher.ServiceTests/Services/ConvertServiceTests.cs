@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using tSeracherr.Entity.Models;
 
 namespace tSeracher.Service.Services.Tests
 {
@@ -6,7 +7,7 @@ namespace tSeracher.Service.Services.Tests
     public class ConvertServiceTests
     {
         [TestMethod()]
-        public async Task TokenConvertAsyncTest()
+        public async Task TokenConvertAsync_ThreeBTCToTRX_NotZiro()
         {
             // arrange
 
@@ -20,7 +21,23 @@ namespace tSeracher.Service.Services.Tests
 
             // assert
 
-            Assert.AreNotEqual(0, countConvertTokens); // TODO: Переробити тест.
+            Assert.AreNotEqual(0, countConvertTokens); 
+        }
+
+        [TestMethod()]
+        public async Task TokenConvertAsync_NullTokenAndTrx_ArgumentNullException()
+        {
+            // arrange
+
+            Token firstToken = null;
+            var secondToken = await SearchTokenService.SearchTokenAsync("trx");
+            decimal amountOfTokens = 0;
+
+            // act
+            // assert
+
+            await Assert.ThrowsExceptionAsync<ArgumentNullException>(
+                async () => await ConvertService.TokenConvertAsync(firstToken, amountOfTokens, secondToken));
         }
     }
 }

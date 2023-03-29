@@ -30,36 +30,38 @@ namespace tSeracherr.WPF.ViewModel
             {
                 return new DelegateCommand(async (obj) =>
                 {
+                    SeriesCollection.Clear();
+                    if (string.IsNullOrWhiteSpace(FirstToken))
+                    {
+                        PrintConvertToken = "Enter first token name pls.";
+                        return;
+                    }
+                    if (string.IsNullOrWhiteSpace(SecondToken))
+                    {
+                        PrintConvertToken = "Enter second token for convertation.";
+                        return;
+                    }
 
-                    // TODO: CheckForNull
                     var firstToken = await SearchTokenService.SearchTokenAsync(FirstToken);
-                    var secondToken = await SearchTokenService.SearchTokenAsync(SecondToken); // Delete secondToken
+                    var secondToken = await SearchTokenService.SearchTokenAsync(SecondToken);
 
-                    var text = await ConvertService.TokenConvertAsync(firstToken, FirstTokenAmount, secondToken);
-                    var seriesCollection = await new PrintCandleService().PrintCandlesAsync(firstToken.FullName);
-
-                    //text.CheckForDefault();
-                    PrintConvertToken = text.ToString();
-
-                    if (seriesCollection.Any())
+                    if(firstToken is null)
                     {
-                        var list = seriesCollection.FirstOrDefault().Values.Cast<OhlcPoint>().Take(100); // TODO: Змінити назву змінної
-
-                        SeriesCollection = new SeriesCollection
-                        {
-                            new OhlcSeries
-                            {
-                                Values = new ChartValues<OhlcPoint>(list)
-                            }
-                        };
+                        PrintConvertToken = $"{FirstToken} not found.";
+                        return;
                     }
-                    else
+                    if (secondToken is null)
                     {
-                        //await SlowPrint(convertModel.ErrorMessage);
-                        //convertModel.ErrorMessage = string.Empty;
-
-                        PrintConvertToken = "Щось не получилось";
+                        PrintConvertToken = $"{SecondToken} not found.";
+                        return;
                     }
+
+                    var countOfTokensWhichWereConvertation = await ConvertService.TokenConvertAsync(firstToken, FirstTokenAmount, secondToken);
+                    PrintConvertToken = countOfTokensWhichWereConvertation.ToString();
+
+                    var seriesCollection = await new PrintCandleService().CreateSeriesCollectionWithPoints(firstToken.FullName);
+
+                    SeriesCollection = seriesCollection;
                 });
             }
 

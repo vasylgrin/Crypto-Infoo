@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using tSeracherr.Entity.Models;
 
 namespace tSeracher.Service.Services.Tests
 {
@@ -6,12 +7,11 @@ namespace tSeracher.Service.Services.Tests
     public class CandleServiceTests
     {
         [TestMethod()]
-        public async Task AddCandleAsyncTest()
+        public async Task AddCandleAsync_ETH_Candles()
         {
             // arrange
 
-            string tokenName = "ethereum";
-
+            string tokenName = "eth";
             var tokenForSearchCandle = await SearchTokenService.SearchTokenAsync(tokenName);
 
             // act
@@ -20,9 +20,21 @@ namespace tSeracher.Service.Services.Tests
 
             // assert
 
-            Assert.AreNotEqual(0, candleDomainModel.ChartValuesOhlcPoint.Count);
-            Assert.AreNotEqual(0, candleDomainModel.ChartValuesObseravableCollection1.Count);
-            Assert.AreNotEqual(0, candleDomainModel.ChartValuesObseravableCollection2.Count);
+            Assert.AreNotEqual(0, candleDomainModel.Count);
+        }
+
+        [TestMethod()]
+        public async Task AddCandleAsyncTest()
+        {
+            // arrange
+
+            Token tokenForSearchCandle = null;
+
+            // act
+            // assert
+
+            await Assert.ThrowsExceptionAsync<ArgumentNullException>(
+                async () => await CandleService.GetCandlesByTokenAsync(tokenForSearchCandle));
         }
     }
 }

@@ -2,6 +2,7 @@
 using LiveCharts.Defaults;
 using LiveCharts.Wpf;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Threading.Tasks;
 using System.Windows.Media;
@@ -10,32 +11,40 @@ using tSeracherr.Entity.Models;
 
 namespace tSeracherr.WPF.Services
 {
-    internal class PrintCandleService
+    internal sealed class PrintCandleService
     {
-        public async Task<SeriesCollection> PrintCandlesAsync(string tokenName) // TODO: Змінити назву методу.
+        private IEnumerable<OhlcPoint> _collection;
+        private SeriesCollection _seriesCollection;
+
+        public async Task<SeriesCollection> CreateSeriesCollectionWithPoints(string tokenName) // TODO: Змінити назву методу.
+        {
+            CheckForInputDataForNull(tokenName);
+            var tokenForSearchCandle = await SearchTokenService.SearchTokenAsync(tokenName);
+
+            _collection = await CandleService.GetCandlesByTokenAsync(tokenForSearchCandle);
+            FillSeriesCollection();
+
+            return await Task.FromResult(_seriesCollection);
+        }
+
+        private void CheckForInputDataForNull(string tokenName)
         {
             if (string.IsNullOrWhiteSpace(tokenName))
             {
-                throw new Exception(); // TODO: EVENT.
+                throw new ArgumentNullException(nameof(tokenName), "Input data is null.");
             }
-
-            var tokenForSearchCandle = await SearchTokenService.SearchTokenAsync(tokenName);
-
-
-            //var candleDomainModel = await CandleService.GetCandlesByTokenAsync(tokenForSearchCandle);
-
-            var candlesList = await CandleService.GetCandlesByTokenAsync(tokenForSearchCandle);
-
-            SeriesCollection seriesCollection = new();
-
-            seriesCollection.Add(new CandleSeries
+        }
+        private void FillSeriesCollection()
+        {
+            _seriesCollection = new SeriesCollection
             {
-                Values = new ChartValues<OhlcPoint>(candlesList),
-                Title = "Candle",
-                ScalesYAt = 0,
-            });
-
-            return await Task.FromResult(seriesCollection);
+                new CandleSeries
+                {
+                    Values = new ChartValues<OhlcPoint>(_collection),
+                    Title = "Candle",
+                    ScalesYAt = 0,
+                }
+            };
         }
     }
 }

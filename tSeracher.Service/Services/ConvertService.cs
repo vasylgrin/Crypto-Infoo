@@ -4,18 +4,18 @@ namespace tSeracher.Service.Services
 {
     public static class ConvertService
     {
-        public static Task<decimal> TokenConvertAsync(Token firstToken, decimal amountOfFirstTokens, Token secondToken)
+        public static async Task<decimal> TokenConvertAsync(Token firstToken, decimal amountOfFirstTokens, Token secondToken)
         {
             if(firstToken == null || secondToken == null)
             {
-                throw new ArgumentNullException(nameof(firstToken)); // TODO: event.
+                throw new ArgumentNullException(nameof(firstToken));
             }
             
             decimal percentage = 0.05m;
 
             decimal res = (firstToken.Price - (firstToken.Price * percentage)) * amountOfFirstTokens / secondToken.Price;
 
-            return Task.FromResult(Math.Round(res, 4));
+            return await Task.FromResult(Math.Round(res, 4));
         }
     }
 }

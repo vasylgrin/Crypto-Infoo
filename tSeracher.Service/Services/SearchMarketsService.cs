@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json.Linq;
 using tSeracher.Service.Helpers;
+using tSeracherr.Entity.Excpetions;
 using tSeracherr.Entity.Models;
 
 namespace tSeracher.Service.Services
@@ -8,27 +9,14 @@ namespace tSeracher.Service.Services
     {
         public static async Task<List<Market>> GetMarketsByTokenAsync(Token tokenForSearchMarkets) // TODO: Зробити NotFound;
         {
-            string? allMarketsString;
-            List<Market> markets;
-
-            if (tokenForSearchMarkets == null)
-            {
-                throw new Exception("not Found"); // TODO: event.
-            }
-            allMarketsString = await ReciveRequestHelper.ReciveToRequest($"https://api.coincap.io/v2/assets/{tokenForSearchMarkets.FullName}/markets");
-
-
-            if (allMarketsString == null)
-            {
-                throw new Exception("not Found"); // TODO: event.
-            }
+            if (tokenForSearchMarkets is null)
+                throw new ArgumentNullException("Input data is null.");
+            
+            var allMarketsString = await ReciveRequestHelper.ReciveToRequest(
+                $"https://api.coincap.io/v2/assets/{tokenForSearchMarkets.FullName}/markets");    
+            
             var allMarketsjToken = JToken.Parse(allMarketsString);
-            markets = await CreateMarketsCollectionAsync(allMarketsjToken["data"]);
-
-            if (!markets.Any())
-            {
-                throw new Exception("not Found"); // TODO: event.
-            }
+            var markets = await CreateMarketsCollectionAsync(allMarketsjToken["data"]);
 
             return await Task.FromResult(markets);
         }

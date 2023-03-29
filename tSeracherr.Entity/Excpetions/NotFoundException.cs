@@ -2,6 +2,7 @@
 {
     public class NotFoundException : Exception
     {
-        public NotFoundException(string msg) : base(msg) { }
+        public string ParamName { get; }
+        public NotFoundException(string paramName,string msg) : base(msg) { ParamName = paramName; }
     }
 }

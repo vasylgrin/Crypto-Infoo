@@ -16,12 +16,12 @@ namespace tSeracher.Service.Helpers.Tests
             
             // act
             
-            var jToken = await ReciveRequestHelper.ReciveToRequest(correctlink);
+            var dataString = await ReciveRequestHelper.ReciveToRequest(correctlink);
             
             // assert
             
-            Assert.IsNotNull(jToken);
-            Assert.AreNotEqual(0, jToken.ToList().Count);
-        }// TODO: тетси з exception.
+            if(string.IsNullOrWhiteSpace(dataString))
+                Assert.Fail();
+        }
     }
 }
