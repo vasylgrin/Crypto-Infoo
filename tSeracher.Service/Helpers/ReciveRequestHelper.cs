@@ -1,5 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using System.Net;
+﻿using System.Net;
 
 namespace tSeracher.Service.Helpers
 {
@@ -7,7 +6,7 @@ namespace tSeracher.Service.Helpers
     {
         private static string _URLString = "";
 
-        
+
         public static async Task<string?> ReciveToRequest(string urlString)
         {
             _URLString = urlString;
@@ -16,7 +15,15 @@ namespace tSeracher.Service.Helpers
 
         private static async Task<string?> ReadStreamAsync()
         {
-            var stream = await CreateStreamAsync();
+            Stream stream = null;
+            try
+            {
+                stream = await CreateStreamAsync();
+            }
+            catch (Exception)
+            {
+                return null;
+            }
 
             if (stream != null)
                 return await new StreamReader(stream).ReadToEndAsync();

@@ -19,10 +19,7 @@ namespace tSeracherr.WPF.ViewModel
         private async void GetTopTokenAsync()
         {
             int amountOfTokensToPrint = 10;
-
             var tokensCollection = await SearchTokenService.GetAllTokensAsync();
-            //tokensCollection.CheckForAnyValue(); //CheckForNull
-
             TopTokens = new ObservableCollection<Token>(tokensCollection.Take(amountOfTokensToPrint));
         }
     }

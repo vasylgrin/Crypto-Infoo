@@ -1,8 +1,4 @@
 ﻿using LiveCharts;
-using LiveCharts.Defaults;
-using LiveCharts.Wpf;
-using System;
-using System.Linq;
 using System.Windows.Input;
 using tSeracher.Service.Services;
 using tSeracherr.WPF.Delegate;
@@ -23,6 +19,7 @@ namespace tSeracherr.WPF.ViewModel
         public string SecondToken { get { return _secondToken; } set { _secondToken = value; OnPropertyChanged(); } }
         public string PrintConvertToken { get => _printConvertToken; set { _printConvertToken = value; OnPropertyChanged(); } }
         public SeriesCollection SeriesCollection { get => _seriesCollection; set { _seriesCollection = value; OnPropertyChanged(); } }
+
 
         public ICommand ConvertTokenButton
         {
@@ -45,7 +42,7 @@ namespace tSeracherr.WPF.ViewModel
                     var firstToken = await SearchTokenService.SearchTokenAsync(FirstToken);
                     var secondToken = await SearchTokenService.SearchTokenAsync(SecondToken);
 
-                    if(firstToken is null)
+                    if (firstToken is null)
                     {
                         PrintConvertToken = $"{FirstToken} not found.";
                         return;

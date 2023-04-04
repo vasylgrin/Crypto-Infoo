@@ -18,7 +18,9 @@ namespace tSeracherr.WPF.Services
 
         public async Task<SeriesCollection> CreateSeriesCollectionWithPoints(string tokenName) // TODO: Змінити назву методу.
         {
-            CheckForInputDataForNull(tokenName);
+            if (string.IsNullOrWhiteSpace(tokenName))
+                throw new ArgumentNullException(nameof(tokenName), "Input data is null.");
+
             var tokenForSearchCandle = await SearchTokenService.SearchTokenAsync(tokenName);
 
             _collection = await CandleService.GetCandlesByTokenAsync(tokenForSearchCandle);
@@ -27,13 +29,6 @@ namespace tSeracherr.WPF.Services
             return await Task.FromResult(_seriesCollection);
         }
 
-        private void CheckForInputDataForNull(string tokenName)
-        {
-            if (string.IsNullOrWhiteSpace(tokenName))
-            {
-                throw new ArgumentNullException(nameof(tokenName), "Input data is null.");
-            }
-        }
         private void FillSeriesCollection()
         {
             _seriesCollection = new SeriesCollection

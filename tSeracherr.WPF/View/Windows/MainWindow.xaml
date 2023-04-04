@@ -5,16 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:tSeracherr.WPF" xmlns:viewmodel="clr-namespace:tSeracherr.WPF.ViewModel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800"
-        Background="DarkRed">
+        Title="tSearcher" 
+        MinHeight="430"
+        Height="500" 
+        Width="900"
+        ResizeMode="NoResize"
+        WindowStyle="ToolWindow"
+        Style="{DynamicResource WindowTheme}">
+    
     <Window.DataContext>
         <viewmodel:MainVM/>
     </Window.DataContext>
 
     <Grid Background="Transparent">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="25*"/>
-            <ColumnDefinition Width="100*"/>
+            <ColumnDefinition Width="150"/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
@@ -28,22 +34,27 @@
         <RadioButton Grid.Column="0"
                      Grid.Row="0"
                      Content="Home"
-                     Command="{Binding HomeButton}"/>
+                     Command="{Binding HomeButton}"
+                     Style="{DynamicResource RadioButtonTheme}"
+                     IsChecked="True"/>
 
         <RadioButton Grid.Column="0"
                      Grid.Row="1"
                      Content="Search"
-                     Command="{Binding SerachTokenButton}"/>
+                     Command="{Binding SerachTokenButton}"
+                     Style="{DynamicResource RadioButtonTheme}"/>
         
         <RadioButton Grid.Column="0"
                      Grid.Row="2"
                      Content="Convert"
-                     Command="{Binding ConvertTokenButton}"/>
+                     Command="{Binding ConvertTokenButton}"
+                     Style="{DynamicResource RadioButtonTheme}"/>
         
         <RadioButton Grid.Column="0"
                      Grid.Row="3"
                      Content="Options"
-                     Command="{Binding OptionsButton}"/>
+                     Command="{Binding OptionsButton}"
+                     Style="{DynamicResource RadioButtonTheme}"/>
 
         <ContentPresenter Content="{Binding CurrentPage}"
                       Grid.Column="1"

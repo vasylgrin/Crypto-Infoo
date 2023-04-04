@@ -7,7 +7,7 @@ namespace tSeracher.Service.Services.Tests
     public class CandleServiceTests
     {
         [TestMethod()]
-        public async Task AddCandleAsync_ETH_Candles()
+        public async Task SearchTokenAsync_ETH_Candles()
         {
             // arrange
 
@@ -24,7 +24,7 @@ namespace tSeracher.Service.Services.Tests
         }
 
         [TestMethod()]
-        public async Task AddCandleAsyncTest()
+        public async Task SearchTokenAsync_null_ArgumentNullException()
         {
             // arrange
 

@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-
-namespace tSeracherr.Entity.Models
+﻿namespace tSeracherr.Entity.Models
 {
     public sealed class Market
     {
@@ -51,7 +49,6 @@ namespace tSeracherr.Entity.Models
                 && market.TokenPriceUsd == TokenPriceUsd
                 && market.QuoteId == QuoteId
                 && market.QuoteSymbol == QuoteSymbol;
-                
         }
 
         public override int GetHashCode()

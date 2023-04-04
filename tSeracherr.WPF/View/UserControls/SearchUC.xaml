@@ -5,79 +5,162 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:tSeracherr.WPF.View.UserControls" xmlns:viewmodel="clr-namespace:tSeracherr.WPF.ViewModel"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800"
-             Background="Transparent">
+             Width="750" 
+             Height="450"
+             Background="Transparent"> 
 
     <UserControl.DataContext>
         <viewmodel:SearchTokenVM/>
     </UserControl.DataContext>
-    
-    <Grid Background="Transparent">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="10*"/>
-            <RowDefinition Height="15*"/>
-            <RowDefinition Height="100*"/>
-            <RowDefinition Height="10*"/>
-        </Grid.RowDefinitions>
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="50*"/>
-            <ColumnDefinition Width="30*"/>
-            <ColumnDefinition Width="100*"/>
-            <ColumnDefinition Width="10*"/>
-        </Grid.ColumnDefinitions>
+    <StackPanel>
+        <StackPanel HorizontalAlignment="Center">
+            <Border Width="150"
+                Height="50">
+                <Border.Clip>
+                    <RectangleGeometry Rect="5,5, 140, 41"
+                                   RadiusX="10"
+                                   RadiusY="10"/>
+                </Border.Clip>
+                <TextBlock Text="Search"
+                           FontSize="20"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Style="{DynamicResource TextBlockTheme}"
+                           Foreground="#707365"/>
+            </Border>
+        </StackPanel>
 
-        <TextBox Grid.Row="1"
-                 Grid.Column="0"
-                 Margin="5"
-                 Text="{Binding TokenForSearch}"
-                 BorderThickness="0"/>
+        <StackPanel HorizontalAlignment="Left">
+            <Border Width="200"
+                Height="30"
+                Style="{DynamicResource BorderTheme}">
+                <Border.Clip>
+                    <RectangleGeometry Rect="5,5, 190, 20"
+                                   RadiusX="10"
+                                   RadiusY="10"/>
+                </Border.Clip>
+                <TextBlock Text="Enter token for search"
+                       FontSize="15"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           Style="{DynamicResource TextBlockThemeWithoutBorder}"/>
+            </Border>
+        </StackPanel>
 
-        <Button Grid.Column="1" 
-                Grid.Row="1"
-                Margin="5"
-                Content="Search"
-                Command="{Binding SearchButton}"
-                BorderThickness="0"/>
+        <StackPanel Orientation="Horizontal">
+            <Border Width="200"
+                    Height="35"
+                    Style="{DynamicResource BorderTheme}">
+                <Border.Clip>
+                    <RectangleGeometry RadiusX="10"
+                                       RadiusY="10"
+                                       Rect="0,0,200,35"/>
+                </Border.Clip>
+                <Grid>
+                    <TextBox BorderThickness="0"
+                             Background="Azure"
+                             Text="{Binding TokenForSearch}"
+                             TextAlignment="Center"
+                             FontSize="15">
+                    </TextBox>
+                </Grid>
+            </Border>
+            <Border Width="100"
+                    Height="35"
+                    Margin="10,0,0,0">
+                <Border.Clip>
+                    <RectangleGeometry RadiusX="10"
+                                       RadiusY="10"
+                                       Rect="0,0,100,35"/>
+                </Border.Clip>
+                <Button BorderThickness="0"
+                        Background="#D4F8F8"
+                        Command="{Binding SearchButton}">
+                    <TextBlock Text="Search"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"/>
+                </Button>
+            </Border>
+        </StackPanel>
+        <StackPanel Height="10"/>
+        <StackPanel Height="20"
+                    Orientation="Horizontal"
+                    >
+            <Border Width="250"
+                    Height="20"
+                    VerticalAlignment="Top">
+                <Border.Clip>
+                    <RectangleGeometry RadiusX="10"
+                                       RadiusY="10"
+                                       Rect="0,0,250,20"/>
+                </Border.Clip>
+                <Grid>
+                    <TextBlock Background="Azure"
+                               Text="{Binding PrintSearchToken}"
+                               TextAlignment="Center"
+                               Style="{DynamicResource TextBlockTheme}"/>
+                </Grid>
+            </Border>
 
-        <TextBlock Grid.Row="1"
-                   Grid.Column="2"
-                   Background="AliceBlue"
-                   Margin="5"
-                   Text="{Binding PrintSearchToken}"/>
 
-        <ListBox ItemsSource="{Binding PrintMarkets}"
-                 Grid.Column="2"
-                 Grid.Row="2"
-                 Margin="5"
-                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                 ScrollViewer.VerticalScrollBarVisibility="Disabled">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="100"/>
-                            <ColumnDefinition Width="100"/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
+        </StackPanel>
+        <StackPanel Height="40"/>
+        <StackPanel Orientation="Horizontal"
+                    Height="229">
+            <Border Width="600"
+                    Height="229"
+                    Background="Azure">
+                <Border.Clip>
+                    <RectangleGeometry RadiusX="10"
+                                       RadiusY="10"
+                                       Rect="0,0,600,229"/>
+                </Border.Clip>
 
-                        <TextBlock Grid.Column="0"
-                                   Text="{Binding Name}"/>
-                        <TextBlock Grid.Column="1"
-                                   Text="{Binding QuoteSymbol}"/>
-                        <TextBlock Grid.Column="2"
-                                   Text="{Binding QuoteId}"/>
-                        <TextBlock Grid.Column="3"
-                                   Text="{Binding TokenName}"/>
-                        <TextBlock Grid.Column="4"
-                                   Text="{Binding TokenSymbol}"/>
+                <ListBox Grid.Row="1" 
+                         ItemsSource="{Binding PrintMarkets}" 
+                         ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                         ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                         Background="Transparent"
+                         BorderThickness="0">
 
-                    </Grid>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Height="40" Width="509">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
 
-    </Grid>
+                                <TextBlock Margin="5,5,5,5"
+                                           Text="{Binding Name}"/>
+
+                                <TextBlock Margin="5,5,5,5" 
+                                           Grid.Column="1"
+                                           Text="{Binding TokenName}"/>
+
+                                <TextBlock Margin="5,5,5,5" 
+                                           Grid.Column="2" 
+                                           Text="{Binding TokenSymbol}"/>
+
+                                <TextBlock Margin="5,5,5,5" 
+                                           Grid.Column="3" 
+                                           Text="{Binding QuoteId}"/>
+                                <TextBlock Margin="5,5,5,5" 
+                                           Grid.Column="4" 
+                                           Text="{Binding QuoteSymbol}"/>
+                                <TextBlock Margin="5,5,5,5" 
+                                           Grid.Column="5" 
+                                           Text="{Binding PriceUsd}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Border>
+        </StackPanel>
+    </StackPanel>
 </UserControl>

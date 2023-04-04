@@ -3,10 +3,70 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:tSeracherr.WPF.View.UserControls"
+             xmlns:local="clr-namespace:tSeracherr.WPF.View.UserControls" xmlns:viewmodel="clr-namespace:tSeracherr.WPF.ViewModel"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="AliceBlue">
-        <TextBlock Text="adsfkjnaskdfnsad"/>
+             Width="750"
+             Height="500">
+    <UserControl.DataContext>
+        <viewmodel:OptionsVM/>
+    </UserControl.DataContext>
+
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <StackPanel>
+            <TextBlock Text="Theme"
+                       FontSize="20"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       Margin="0,20,0,0"
+                       Style="{DynamicResource TextBlockThemeWithoutBorder}"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+
+            <Border Background="AliceBlue"
+                    Width="120"
+                    Height="100">
+                <Border.Clip>
+                    <RectangleGeometry RadiusX="10"
+                                       RadiusY="10"
+                                       Rect="10,25,100,50"/>
+                </Border.Clip>
+                <Button
+                    Height="50"
+                    Content="Light"
+                    Command="{Binding Light}"
+                    Margin="10,25,8,25"
+                        Background="Transparent"
+                        BorderThickness="0"/>
+            </Border>
+
+            <Border Background="AliceBlue"
+                    Width="120"
+                    Height="100">
+                <Border.Clip>
+                    <RectangleGeometry RadiusX="10"
+                                       RadiusY="10"
+                                       Rect="10,25,100,50"/>
+                </Border.Clip>
+                <Button BorderThickness="0"
+                    Height="50"
+                    Content="Dark"
+                    Command="{Binding Dark}"
+                    Margin="10,25,8,25"
+                        Background="Transparent"/>
+            </Border>
+        </StackPanel>
     </Grid>
 </UserControl>

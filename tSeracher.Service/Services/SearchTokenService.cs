@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json.Linq;
 using tSeracher.Service.Helpers;
-using tSeracherr.Entity.Excpetions;
 using tSeracherr.Entity.Models;
 
 namespace tSeracher.Service.Services
@@ -9,9 +8,7 @@ namespace tSeracher.Service.Services
     {
         public static async Task<Token> SearchTokenAsync(string searchTokenName)
         {
-            // TODO: Зробити пошук по іменні зразу по api.
-
-            if(string.IsNullOrWhiteSpace(searchTokenName))
+            if (string.IsNullOrWhiteSpace(searchTokenName))
                 throw new ArgumentNullException(nameof(searchTokenName), "Input data is null.");
 
             var tokensCollection = await GetAllTokensAsync();
