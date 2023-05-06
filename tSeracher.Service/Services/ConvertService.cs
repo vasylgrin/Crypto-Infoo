@@ -11,9 +11,7 @@ namespace tSeracher.Service.Services
                 throw new ArgumentNullException(nameof(firstToken));
             }
             
-            decimal percentage = 0.05m;
-
-            decimal res = (firstToken.Price - (firstToken.Price * percentage)) * amountOfFirstTokens / secondToken.Price;
+            decimal res = firstToken.Price * amountOfFirstTokens / secondToken.Price;
 
             return await Task.FromResult(Math.Round(res, 4));
         }

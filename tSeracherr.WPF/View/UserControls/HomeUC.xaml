@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:tSeracherr.WPF.View.UserControls" xmlns:viewmodel="clr-namespace:tSeracherr.WPF.ViewModel"
+             xmlns:viewmodel="clr-namespace:tSeracherr.WPF.ViewModel"     
+             xmlns:lang="clr-namespace:tSeracherr.WPF.Languages"
              mc:Ignorable="d" 
              Width="750"
              Height="500">
@@ -14,55 +15,39 @@
 
     <StackPanel>
 
-        <Border Width="100"
-                Height="50"
-                Background="Azure">
-            <Border.Clip>
-                <RectangleGeometry Rect="5,5, 90, 40"
-                                   RadiusX="10"
-                                   RadiusY="10"/>
-            </Border.Clip>
-            <TextBlock Text="Home"
-                       FontSize="28"
-                       HorizontalAlignment="Center"
-                       Margin="5"
-                       Style="{DynamicResource TextBlockInListBox}"/>
-        </Border>
+        <TextBlock Text="{x:Static lang:Lang.HomeUC_TextBlock_Home}"
+                   FontSize="28"
+                   Style="{DynamicResource TextBlockTheme}"/>
+        
         <StackPanel>
-            <Border Width="200"
-                    Height="50"
-                    Background="Azure">
-                <Border.Clip>
-                    <RectangleGeometry Rect="5,5, 190, 40"
-                                       RadiusX="10"
-                                       RadiusY="10"/>
-                </Border.Clip>
-                <TextBlock Text="Top 10 tokens"
-                           FontSize="20"
-                           HorizontalAlignment="Center"
-                           VerticalAlignment="Center"
-                           Margin="5"
-                           Style="{DynamicResource TextBlockTheme}"/>
-            </Border>
+            
+            <TextBlock Text="{x:Static lang:Lang.HomeUC_TextBlock_Top}"
+                       FontSize="20"
+                       Style="{DynamicResource TextBlockTheme}"/>
+            
         </StackPanel>
 
         <StackPanel Orientation="Horizontal"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center">
+            
             <Border Width="600"
                     Height="310"
                     Background="Azure"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center">
+                
                 <Border.Clip>
                     <RectangleGeometry RadiusX="10"
                                        RadiusY="10"
                                        Rect="0,0,600,310"/>
                 </Border.Clip>
+                
                 <Grid>
                     <ListBox Background="Transparent"
                              BorderBrush="Transparent"
                              ItemsSource="{Binding TopTokens}"
+                             SelectedItem="{Binding SelectedItem}"
                              ScrollViewer.VerticalScrollBarVisibility="Hidden" 
                              ScrollViewer.HorizontalScrollBarVisibility="Hidden">
                         <ListBox.ItemTemplate>

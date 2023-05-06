@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:tSeracherr.WPF.View.UserControls" xmlns:viewmodel="clr-namespace:tSeracherr.WPF.ViewModel" xmlns:lcv="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+             xmlns:lang="clr-namespace:tSeracherr.WPF.Languages"
              mc:Ignorable="d" 
              Width="750"
              Height="500"
@@ -14,37 +15,25 @@
     </UserControl.DataContext>
 
     <StackPanel>
-        <Border Width="150"
-                Height="50"
-                Background="Azure">
-            <Border.Clip>
-                <RectangleGeometry Rect="5,5, 140, 35"
-                                   RadiusX="10"
-                                   RadiusY="10"/>
-            </Border.Clip>
-            <TextBlock Text="Convert"
+        <TextBlock Text="{x:Static lang:Lang.ConvertUC_TextBlock_Convert}"
                    FontSize="28"
-                   HorizontalAlignment="Center"
-                   Margin="0,0,0,20"
                    Style="{DynamicResource TextBlockTheme}"/>
-        </Border>
 
         <StackPanel Orientation="Horizontal">
 
             <Border Width="170"
-                Height="50"
-                Background="Azure">
+                    Height="50"
+                    Background="Azure">
                 <Border.Clip>
-                    <RectangleGeometry Rect="5,5, 160, 35"
+                    <RectangleGeometry Rect="5,9, 160, 35"
                                    RadiusX="10"
                                    RadiusY="10"/>
                 </Border.Clip>
-                <TextBlock Text="That we convert"
+                
+                <TextBlock Text="{x:Static lang:Lang.ConvertUC_TextBlock_WhatConvert}"
                            FontSize="20"
-                           HorizontalAlignment="Center"
-                           VerticalAlignment="Top"
-                           Margin="0,10,0,0"
-                           Style="{DynamicResource TextBlockTheme}"/>
+                           Style="{DynamicResource TextBlockThemeWithBorder}"/>
+                
             </Border>
 
 
@@ -52,34 +41,30 @@
                 Height="50"
                 Background="Azure">
                 <Border.Clip>
-                    <RectangleGeometry Rect="5,5, 210, 35"
+                    <RectangleGeometry Rect="5,9, 210, 35"
                                    RadiusX="10"
                                    RadiusY="10"/>
                 </Border.Clip>
-                <TextBlock Text="What do we convert to"
+                
+                <TextBlock Text="{x:Static lang:Lang.ConvertUC_TextBlock_ConvertTo}"
                            FontSize="20"
-                           HorizontalAlignment="Center"
-                           VerticalAlignment="Top"
-                           Margin="0,10,0,0"
-                           Style="{DynamicResource TextBlockTheme}"/>
+                           Style="{DynamicResource TextBlockThemeWithBorder}"/>
+                
             </Border>
 
             <Border Width="220"
                 Height="50"
                 Background="Azure">
                 <Border.Clip>
-                    <RectangleGeometry Rect="5,5, 210, 35"
+                    <RectangleGeometry Rect="5,9, 210, 35"
                                    RadiusX="10"
                                    RadiusY="10"/>
                 </Border.Clip>
-                <TextBlock Text="Convert token"
+                <TextBlock Text="{x:Static lang:Lang.ConvertUC_TextBlock_ConvertToken}"
                            FontSize="20"
-                           HorizontalAlignment="Center"
-                           VerticalAlignment="Top"
-                           Margin="0,10,0,0"
-                           Style="{DynamicResource TextBlockTheme}"/>
+                           Style="{DynamicResource TextBlockThemeWithBorder}"/>
             </Border>
-         
+
         </StackPanel>
         <StackPanel Orientation="Horizontal"
                     Height="40">
@@ -138,8 +123,8 @@
                 <TextBlock Text="{Binding PrintConvertToken}"
                            Background="Transparent"
                            TextAlignment="Center"
-                           FontSize="15"
-                           Style="{DynamicResource TextBlockTheme}"/>
+                           FontSize="13"
+                           Style="{DynamicResource TextBlockThemeWithBorder}"/>
             </Border>
 
             <Border Width="80"
@@ -153,11 +138,14 @@
                 <Button Background="Transparent"
                         BorderThickness="0"
                         Command="{Binding ConvertTokenButton}">
-                    <TextBlock Text="Convert"
-                               Style="{DynamicResource TextBlockTheme}"/>
+                    
+                    <TextBlock Text="{x:Static lang:Lang.ConvertUC_Btn_Convert}"
+                               FontSize="14"
+                               Style="{DynamicResource TextBlockThemeWithBorder}"/>
+                    
                 </Button>
             </Border>
-            
+
         </StackPanel>
         <StackPanel Height="270"
                     Width="650"

@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:tSeracherr.WPF.View.UserControls" xmlns:viewmodel="clr-namespace:tSeracherr.WPF.ViewModel"
+             xmlns:lang="clr-namespace:tSeracherr.WPF.Languages"
              mc:Ignorable="d" 
              Width="750" 
              Height="450"
@@ -15,40 +16,23 @@
 
     <StackPanel>
         <StackPanel HorizontalAlignment="Center">
-            <Border Width="150"
-                Height="50">
-                <Border.Clip>
-                    <RectangleGeometry Rect="5,5, 140, 41"
-                                   RadiusX="10"
-                                   RadiusY="10"/>
-                </Border.Clip>
-                <TextBlock Text="Search"
+            
+            <TextBlock Text="{x:Static lang:Lang.SearchUC_TextBlock_Search}"
                            FontSize="20"
-                           HorizontalAlignment="Center"
-                           VerticalAlignment="Center"
-                           Style="{DynamicResource TextBlockTheme}"
-                           Foreground="#707365"/>
-            </Border>
+                           Style="{DynamicResource TextBlockTheme}"/>
+            
         </StackPanel>
 
         <StackPanel HorizontalAlignment="Left">
-            <Border Width="200"
-                Height="30"
-                Style="{DynamicResource BorderTheme}">
-                <Border.Clip>
-                    <RectangleGeometry Rect="5,5, 190, 20"
-                                   RadiusX="10"
-                                   RadiusY="10"/>
-                </Border.Clip>
-                <TextBlock Text="Enter token for search"
+            
+            <TextBlock Text="{x:Static lang:Lang.SearchUC_TextBlock_EnterTokenForSearch}"
                        FontSize="15"
-                           VerticalAlignment="Center"
-                           HorizontalAlignment="Center"
-                           Style="{DynamicResource TextBlockThemeWithoutBorder}"/>
-            </Border>
+                       Style="{DynamicResource TextBlockTheme}"/>
+            
         </StackPanel>
 
         <StackPanel Orientation="Horizontal">
+            
             <Border Width="200"
                     Height="35"
                     Style="{DynamicResource BorderTheme}">
@@ -57,15 +41,15 @@
                                        RadiusY="10"
                                        Rect="0,0,200,35"/>
                 </Border.Clip>
-                <Grid>
-                    <TextBox BorderThickness="0"
+                <TextBox BorderThickness="0"
                              Background="Azure"
                              Text="{Binding TokenForSearch}"
                              TextAlignment="Center"
                              FontSize="15">
-                    </TextBox>
-                </Grid>
+                </TextBox>
             </Border>
+            
+            
             <Border Width="100"
                     Height="35"
                     Margin="10,0,0,0">
@@ -77,37 +61,46 @@
                 <Button BorderThickness="0"
                         Background="#D4F8F8"
                         Command="{Binding SearchButton}">
-                    <TextBlock Text="Search"
-                               HorizontalAlignment="Center"
-                               VerticalAlignment="Center"/>
+                    
+                    <TextBlock Text="{x:Static lang:Lang.SearchUC_Btn_Search}"
+                               Style="{DynamicResource TextBlockThemeWithBorder}"
+                               FontSize="16"/>
+                    
                 </Button>
             </Border>
         </StackPanel>
+        
+        
         <StackPanel Height="10"/>
+        
         <StackPanel Height="20"
-                    Orientation="Horizontal"
-                    >
+                    Orientation="Horizontal">
+
+
             <Border Width="250"
                     Height="20"
-                    VerticalAlignment="Top">
+                    VerticalAlignment="Top"
+                    Background="AliceBlue">
                 <Border.Clip>
                     <RectangleGeometry RadiusX="10"
                                        RadiusY="10"
                                        Rect="0,0,250,20"/>
                 </Border.Clip>
                 <Grid>
-                    <TextBlock Background="Azure"
-                               Text="{Binding PrintSearchToken}"
-                               TextAlignment="Center"
-                               Style="{DynamicResource TextBlockTheme}"/>
+
+                    <TextBlock Text="{Binding PrintSearchToken}"
+                               Style="{DynamicResource TextBlockThemeWithBorder}"/>
+
                 </Grid>
             </Border>
-
-
         </StackPanel>
+        
+        
         <StackPanel Height="40"/>
+        
         <StackPanel Orientation="Horizontal"
                     Height="229">
+            
             <Border Width="600"
                     Height="229"
                     Background="Azure">

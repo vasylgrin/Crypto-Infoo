@@ -42,14 +42,28 @@
         <Setter Property="Foreground" Value="Black"/>
     </Style>
 
-    <Style TargetType="TextBlock"
+    <Style TargetType="{x:Type TextBlock}"
            x:Key="TextBlockTheme">
-        <Setter Property="Foreground" Value="Black"/>
+
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="TextWrapping" Value="NoWrap"/>
+        <Setter Property="Margin" Value="5"/>
+        
     </Style>
 
-    <Style TargetType="TextBlock"
-           x:Key="TextBlockThemeWithoutBorder">
-        <Setter Property="Foreground" Value="White"/>
+    <Style TargetType="{x:Type TextBlock}"
+           x:Key="TextBlockThemeWithBorder">
+
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="TextWrapping" Value="NoWrap"/>
+        <Setter Property="Margin" Value="5"/>
+
     </Style>
-    
+
 </ResourceDictionary>

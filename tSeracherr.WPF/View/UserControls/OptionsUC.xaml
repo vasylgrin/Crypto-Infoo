@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:tSeracherr.WPF.View.UserControls" xmlns:viewmodel="clr-namespace:tSeracherr.WPF.ViewModel"
+             xmlns:lang="clr-namespace:tSeracherr.WPF.Languages"
              mc:Ignorable="d" 
              Width="750"
              Height="500">
@@ -28,10 +29,7 @@
         <StackPanel>
             <TextBlock Text="Theme"
                        FontSize="20"
-                       VerticalAlignment="Center"
-                       HorizontalAlignment="Center"
-                       Margin="0,20,0,0"
-                       Style="{DynamicResource TextBlockThemeWithoutBorder}"/>
+                       Style="{DynamicResource TextBlockTheme}"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal">
 
@@ -43,13 +41,16 @@
                                        RadiusY="10"
                                        Rect="10,25,100,50"/>
                 </Border.Clip>
-                <Button
-                    Height="50"
-                    Content="Light"
-                    Command="{Binding Light}"
-                    Margin="10,25,8,25"
+                <Button Height="50"
+                        Command="{Binding Light}"
+                        Margin="10,25,8,25"
                         Background="Transparent"
-                        BorderThickness="0"/>
+                        BorderThickness="0">
+                    
+                    <TextBlock Text="{x:Static lang:Lang.OptionsUC_Btn_Light}"
+                               FontSize="20"/>
+                    
+                </Button>
             </Border>
 
             <Border Background="AliceBlue"
@@ -61,11 +62,60 @@
                                        Rect="10,25,100,50"/>
                 </Border.Clip>
                 <Button BorderThickness="0"
-                    Height="50"
-                    Content="Dark"
-                    Command="{Binding Dark}"
-                    Margin="10,25,8,25"
-                        Background="Transparent"/>
+                        Height="50"
+                        Command="{Binding Dark}"
+                        Margin="10,25,8,25"
+                        Background="Transparent">
+
+                    <TextBlock Text="{x:Static lang:Lang.OptionsUC_Btn_Dark}"
+                               FontSize="20"/>
+                </Button>
+            </Border>
+        </StackPanel>
+
+
+        <StackPanel Grid.Column="1">
+            <TextBlock Text="{x:Static lang:Lang.OptionsUC_TextBlock_Languages}"
+                       FontSize="20"
+                       Style="{DynamicResource TextBlockTheme}"/>
+        </StackPanel>
+        <StackPanel Grid.Column="1"
+                    Orientation="Horizontal">
+            
+            
+
+            <Border Background="AliceBlue"
+                    Width="120"
+                    Height="100">
+                <Border.Clip>
+                    <RectangleGeometry RadiusX="10"
+                                       RadiusY="10"
+                                       Rect="10,25,100,50"/>
+                </Border.Clip>
+                <Button Command="{Binding UkrLang}"
+                        Background="Transparent"
+                        BorderThickness="0">
+                    <TextBlock Text="{x:Static lang:Lang.OptionsUC_Btn_Ukr}"
+                           FontSize="20"/>
+                </Button>
+            </Border>
+
+            <Border Background="AliceBlue"
+                    Width="120"
+                    Height="100">
+                <Border.Clip>
+                    <RectangleGeometry RadiusX="10"
+                                       RadiusY="10"
+                                       Rect="10,25,100,50"/>
+                </Border.Clip>
+                <Button Command="{Binding EngLang}"
+                        Background="Transparent"
+                        BorderThickness="0">
+                    
+                    <TextBlock Text="{x:Static lang:Lang.OptionsUC_Btn_Eng}"
+                           FontSize="20"/>
+                    
+                </Button>
             </Border>
         </StackPanel>
     </Grid>

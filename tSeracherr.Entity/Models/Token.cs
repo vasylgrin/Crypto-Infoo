@@ -6,9 +6,11 @@
         public string? FullName { get; set; }
         public string? Symbol { get; set; }
         public decimal Price { get; set; }
+        public string? MarketLink { get; set; }
+
 
         public Token() { }
-        public Token(int number, string fullName, string symbol, decimal price)
+        public Token(int number, string fullName, string symbol, decimal price, string marketLink)
         {
             if (number < 0)
                 throw new ArgumentNullException(nameof(number), "The sequence number cannot be less than or equal to null.");
@@ -23,11 +25,12 @@
             FullName = fullName;
             Symbol = symbol;
             Price = price;
+            MarketLink = marketLink;
         }
 
         public override string ToString()
         {
-            return $"{Number} {FullName} {Symbol} {Math.Round(Price, 4)}$";
+            return $"{Number} {FullName} {Symbol} {Math.Round(Price, 3)}$";
         }
 
         public override bool Equals(object obj)

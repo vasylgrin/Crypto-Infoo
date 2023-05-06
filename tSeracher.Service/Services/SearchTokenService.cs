@@ -22,22 +22,18 @@ namespace tSeracher.Service.Services
             var allTokensString = await ReciveRequestHelper.ReciveToRequest(@"https://api.coincap.io/v2/assets/");
 
             var jToken = JToken.Parse(allTokensString);
-            var tokensList = await CreateTokenListAsync(jToken["data"]);
+            var tokensList = CreateTokenListAsync(jToken["data"]).ToList();
 
             return await Task.FromResult(tokensList);
         }
 
-        private static async Task<List<Token>> CreateTokenListAsync(JToken allTokensJToken)
+        private static IEnumerable<Token> CreateTokenListAsync(JToken allTokensJToken)
         {
-            var tokensList = new List<Token>();
-
             foreach (var tkn in allTokensJToken)
             {
-                var token = new Token(Convert.ToInt32(tkn["rank"]), tkn["id"].ToString(), tkn["symbol"].ToString(), Convert.ToDecimal(tkn["priceUsd"]));
-                tokensList.Add(token);
+                var token = new Token(Convert.ToInt32(tkn["rank"]), tkn["id"].ToString(), tkn["symbol"].ToString(), Convert.ToDecimal(tkn["priceUsd"]), tkn["explorer"].ToString());
+                yield return token;
             }
-
-            return await Task.FromResult(tokensList);
         }
     }
 }

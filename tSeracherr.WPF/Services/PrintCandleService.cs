@@ -3,11 +3,8 @@ using LiveCharts.Defaults;
 using LiveCharts.Wpf;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Threading.Tasks;
-using System.Windows.Media;
 using tSeracher.Service.Services;
-using tSeracherr.Entity.Models;
 
 namespace tSeracherr.WPF.Services
 {

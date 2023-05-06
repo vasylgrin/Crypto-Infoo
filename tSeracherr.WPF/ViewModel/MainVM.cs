@@ -1,17 +1,11 @@
 ﻿using System.Windows.Input;
 using tSeracherr.WPF.Delegate;
-using tSeracherr.WPF.Services;
 using tSeracherr.WPF.View.UserControls;
 
 namespace tSeracherr.WPF.ViewModel
 {
     internal class MainVM : BaseVM
     {
-        private static object _currentPage;
-
-        public object CurrentPage { get => _currentPage; set { _currentPage = value; OnPropertyChanged(); } }
-
-
         public MainVM()
         {
             CurrentPage = new HomeUC();
@@ -21,21 +15,21 @@ namespace tSeracherr.WPF.ViewModel
         {
             get
             {
-                return new DelegateCommand(obj => CurrentPage = new HomeUC());
+                return Navigation(new HomeUC());
             }
         }
         public ICommand SerachTokenButton
         {
             get
             {
-                return new DelegateCommand(obj => CurrentPage = new SearchUC());
+                return Navigation(new SearchUC());
             }
         }
         public ICommand ConvertTokenButton
         {
             get
             {
-                return new DelegateCommand(obj => CurrentPage = new ConvertUC());
+                return Navigation(new ConvertUC());
             }
         }
 
@@ -43,8 +37,13 @@ namespace tSeracherr.WPF.ViewModel
         {
             get
             {
-                return new DelegateCommand(obj => CurrentPage = new OptionsUC());
+                return Navigation(new OptionsUC());
             }
+        }
+
+        private ICommand Navigation(object Window)
+        {
+            return new DelegateCommand(obj => CurrentPage = Window);
         }
     }
 }

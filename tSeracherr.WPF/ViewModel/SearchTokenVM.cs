@@ -27,7 +27,7 @@ namespace tSeracherr.WPF.ViewModel
                     PrintMarkets.Clear();
                     if (string.IsNullOrWhiteSpace(TokenForSearch))
                     {
-                        PrintSearchToken = "Enter token name pls.";
+                        PrintSearchToken = Languages.Lang.SearchVM_EntrTknName;
                         return;
                     }
                     var token = await SearchTokenService.SearchTokenAsync(TokenForSearch);
@@ -35,7 +35,7 @@ namespace tSeracherr.WPF.ViewModel
 
                     if (token is null)
                     {
-                        PrintSearchToken = $"{TokenForSearch} is not found";
+                        PrintSearchToken = $"{TokenForSearch} {Languages.Lang.ErrorMSG_WasntFound}";
                         return;
                     }
                     PrintSearchToken = token.ToString();

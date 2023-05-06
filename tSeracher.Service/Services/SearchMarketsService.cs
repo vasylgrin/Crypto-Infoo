@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json.Linq;
+using System.Collections;
 using tSeracher.Service.Helpers;
 using tSeracherr.Entity.Models;
 
@@ -15,22 +16,18 @@ namespace tSeracher.Service.Services
                 $"https://api.coincap.io/v2/assets/{tokenForSearchMarkets.FullName}/markets");
 
             var allMarketsjToken = JToken.Parse(allMarketsString);
-            var markets = await CreateMarketsCollectionAsync(allMarketsjToken["data"]);
+            var markets = CreateMarketsCollectionAsync(allMarketsjToken["data"]).ToList();
 
             return await Task.FromResult(markets);
         }
 
-        private async static Task<List<Market>> CreateMarketsCollectionAsync(JToken allMarketsjToken)
+        private static IEnumerable<Market> CreateMarketsCollectionAsync(JToken allMarketsjToken)
         {
-            var marketCollection = new List<Market>();
-
             foreach (var mkt in allMarketsjToken)
             {
                 var market = new Market(mkt["exchangeId"].ToString(), mkt["baseId"].ToString(), mkt["baseSymbol"].ToString(), Math.Round(Convert.ToDouble(mkt["priceUsd"]), 4), mkt["quoteId"].ToString(), mkt["quoteSymbol"].ToString());
-                marketCollection.Add(market);
+                yield return market;
             }
-
-            return await Task.FromResult(marketCollection);
         }
     }
 }

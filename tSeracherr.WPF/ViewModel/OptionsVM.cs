@@ -1,11 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Diagnostics;
+using System.Globalization;
+using System.Resources;
+using System.Threading;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Threading;
 using tSeracherr.WPF.Delegate;
+using tSeracherr.WPF.Services;
 
 namespace tSeracherr.WPF.ViewModel
 {
@@ -15,14 +17,7 @@ namespace tSeracherr.WPF.ViewModel
         {
             get
             {
-                return new DelegateCommand((obj) =>
-                {
-                    App.Current.Resources.MergedDictionaries.RemoveAt(0);
-
-                    var uri = new Uri("Themes\\LightMode.xaml", UriKind.Relative);
-                    var resDict = new ResourceDictionary() { Source = uri };
-                    App.Current.Resources.MergedDictionaries.Add(resDict);
-                });
+                return new DelegateCommand(obj => OptionsService.ChangeTheme(OptionsService.LIGHT_THEME_URL));
             }
         }
 
@@ -30,14 +25,23 @@ namespace tSeracherr.WPF.ViewModel
         {
             get
             {
-                return new DelegateCommand((obj) =>
-                {
-                    App.Current.Resources.MergedDictionaries.RemoveAt(0);
+                return new DelegateCommand(obj => OptionsService.ChangeTheme(OptionsService.DARK_THEME_URL));
+            }
+        }
 
-                    var uri = new Uri("Themes\\DarkMode.xaml", UriKind.Relative);
-                    var resDict = new ResourceDictionary() { Source = uri };
-                    App.Current.Resources.MergedDictionaries.Add(resDict);
-                });
+        public ICommand EngLang
+        {
+            get
+            {
+                return new DelegateCommand(obj => OptionsService.ChangeLanguage(OptionsService.ENG_LANG_CODE));
+            }
+        }
+
+        public ICommand UkrLang
+        {
+            get
+            {
+                return new DelegateCommand(obj => OptionsService.ChangeLanguage(OptionsService.UKR_LANG_CODE));
             }
         }
     }

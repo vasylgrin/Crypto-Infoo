@@ -3,7 +3,7 @@
 
     <Style TargetType="Window" 
                x:Key="WindowTheme">
-        <Setter Property="Background" Value="#E0E6CB"/>
+        <Setter Property="Background" Value="Aqua"/>
     </Style>
 
     <Style TargetType="RadioButton" 
@@ -23,14 +23,14 @@
                 </Setter.Value>
             </Setter>
 
-            <Setter Property="Background" Value="#E0E6CB"/>
+            <Setter Property="Background" Value="Aqua"/>
             <Setter Property="Foreground" Value="Black"/>
             <Setter Property="BorderThickness" Value="0"/>
         </Style.Setters>
 
         <Style.Triggers>
             <Trigger Property="IsChecked" Value="True">
-                <Setter Property="Background" Value="#d1d9b7"/>
+                <Setter Property="Background" Value="#00CED1"/>
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -40,14 +40,28 @@
         <Setter Property="Foreground" Value="Black"/>
     </Style>
 
-    <Style TargetType="TextBlock"
-           x:Name="TextBlockTheme">
-        <Setter Property="Foreground" Value="#595C50"/>
+    <Style TargetType="{x:Type TextBlock}"
+           x:Key="TextBlockTheme">
+
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="TextWrapping" Value="NoWrap"/>
+        <Setter Property="Margin" Value="5"/>
+
     </Style>
 
-    <Style TargetType="TextBlock"
-           x:Key="TextBlockThemeWithoutBorder">
-        <Setter Property="Foreground" Value="#595C50"/>
+    <Style TargetType="{x:Type TextBlock}"
+           x:Key="TextBlockThemeWithBorder">
+
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="TextWrapping" Value="NoWrap"/>
+        <Setter Property="Margin" Value="5"/>
+
     </Style>
 
 </ResourceDictionary>

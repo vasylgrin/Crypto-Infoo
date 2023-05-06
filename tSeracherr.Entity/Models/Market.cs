@@ -8,7 +8,7 @@
         public double? TokenPriceUsd { get; set; }
         public string? QuoteId { get; set; }
         public string? QuoteSymbol { get; set; }
-
+        
         public Market() { }
         public Market(string? name, string? tokenName, string tokenAbreviated, double? tokenPriceUsd, string? quoteId, string quoteSymbol)
         {

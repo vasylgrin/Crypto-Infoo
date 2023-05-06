@@ -30,12 +30,12 @@ namespace tSeracherr.WPF.ViewModel
                     SeriesCollection.Clear();
                     if (string.IsNullOrWhiteSpace(FirstToken))
                     {
-                        PrintConvertToken = "Enter first token name pls.";
+                        PrintConvertToken = Languages.Lang.ConvertVM_EntrFirstTkn;
                         return;
                     }
                     if (string.IsNullOrWhiteSpace(SecondToken))
                     {
-                        PrintConvertToken = "Enter second token for convertation.";
+                        PrintConvertToken = Languages.Lang.ConvertVM_EntrScndTkn;
                         return;
                     }
 
@@ -44,12 +44,12 @@ namespace tSeracherr.WPF.ViewModel
 
                     if (firstToken is null)
                     {
-                        PrintConvertToken = $"{FirstToken} not found.";
+                        PrintConvertToken = $"{FirstToken} {Languages.Lang.ErrorMSG_WasntFound}";
                         return;
                     }
                     if (secondToken is null)
                     {
-                        PrintConvertToken = $"{SecondToken} not found.";
+                        PrintConvertToken = $"{SecondToken} {Languages.Lang.ErrorMSG_WasntFound}";
                         return;
                     }
 

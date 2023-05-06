@@ -1,5 +1,6 @@
 ﻿using LiveCharts.Defaults;
 using Newtonsoft.Json.Linq;
+using System.Collections;
 using tSeracher.Service.Helpers;
 using tSeracherr.Entity.Models;
 
@@ -16,22 +17,18 @@ namespace tSeracher.Service.Services
             string allCandlesString = await ReciveRequestHelper.ReciveToRequest(link);
 
             var candlesJArray = JArray.Parse(allCandlesString);
-            var candles = await CreateCandleAsync(candlesJArray);
+            var candles = CreateCandleAsync(candlesJArray);
 
-            return await Task.FromResult(candles);
+            return await Task.FromResult(candles.ToList());
         }
 
-        private static async Task<List<OhlcPoint>> CreateCandleAsync(JArray candlesArray)
+        private static IEnumerable<OhlcPoint> CreateCandleAsync(JArray candlesArray)
         {
-            var candlesCollection = new List<OhlcPoint>();
-
             foreach (var candleInform in candlesArray)
             {
                 var candle = new OhlcPoint(Convert.ToDouble(candleInform[1]), Convert.ToDouble(candleInform[2]), Convert.ToDouble(candleInform[3]), Convert.ToDouble(candleInform[4]));
-                candlesCollection.Add(candle);
+                yield return candle;
             }
-
-            return await Task.FromResult(candlesCollection);
         }
     }
 }
